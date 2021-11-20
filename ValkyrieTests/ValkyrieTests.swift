@@ -18,18 +18,27 @@ private final class Valkyrie {
 
     // MARK: - Private Properties
 
-    let tile: CGRect
+    private let tile: CGRect
+    private var queue = [CGPoint]()
 
     // MARK: - Initializers
 
     init(tile: CGRect) {
         self.tile = tile
+
+        for index in 0..<Int(tile.width) {
+            queue.append(CGPoint(x: index, y: index))
+        }
     }
 
     // MARK: - Public Methods
 
     func shoot() -> CGPoint {
-        .zero
+        if !queue.isEmpty {
+            return queue.removeFirst()
+        }
+
+        return .zero
     }
 }
 
@@ -68,9 +77,30 @@ class ValkyrieTests: XCTestCase {
         }
     }
 
+    func test_shoot_shootsByDiagonal() {
+        (0...100).forEach { side in
+            let sut = makeSUT(tile: CGRect(x: 0, y: 0, width: side, height: side))
+            let expectedShootPoints = diagonalPoints(for: side)
+            let actualShootPoints = actualPoints(for: side, from: sut)
+            XCTAssertEqual(expectedShootPoints, actualShootPoints)
+        }
+    }
+
     // MARK: - Helpers
 
     private func makeSUT(tile: CGRect = .zero) -> Valkyrie {
         Valkyrie(tile: tile)
+    }
+
+    private func diagonalPoints(for count: Int) -> [CGPoint] {
+        (0..<count).reduce([]) { partialResult, side in
+            partialResult + [CGPoint(x: side, y: side)]
+        }
+    }
+
+    private func actualPoints(for count: Int, from sut: Valkyrie) -> [CGPoint] {
+        (0..<count).reduce([]) { partialResult, _ in
+            partialResult + [sut.shoot()]
+        }
     }
 }
