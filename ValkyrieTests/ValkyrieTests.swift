@@ -18,6 +18,25 @@ private final class Valkyrie {
 
     // MARK: - Private Properties
 
+    private let shooter: Shooter
+
+    // MARK: - Initializers
+
+    init(tile: CGRect) {
+        shooter = Shooter(tile: tile)
+    }
+
+    // MARK: - Public Methods
+
+    func shoot() -> CGPoint {
+        shooter.shoot()
+    }
+}
+
+private final class Shooter {
+
+    // MARK: - Private Properties
+
     private let tile: CGRect
     private var queue = [CGPoint]()
 
@@ -31,7 +50,7 @@ private final class Valkyrie {
         }
     }
 
-    // MARK: - Public Methods
+    // MARK: - Public Properties
 
     func shoot() -> CGPoint {
         if !queue.isEmpty {
