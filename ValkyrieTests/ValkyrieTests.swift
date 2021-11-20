@@ -13,6 +13,7 @@ private final class Valkyrie {
 
     let name = "Valkyrie"
     let greeting = "Hei Verden!"
+    let winMessage = "Slik blir det med alle!"
 }
 
 class ValkyrieTests: XCTestCase {
@@ -25,5 +26,10 @@ class ValkyrieTests: XCTestCase {
     func test_greeting_returnsGreetingMessage() {
         let sut = Valkyrie()
         XCTAssertEqual(sut.greeting, "Hei Verden!")
+    }
+
+    func test_winMessage_returnsWinMessage() {
+        let sut = Valkyrie()
+        XCTAssertEqual(sut.winMessage, "Slik blir det med alle!")
     }
 }
