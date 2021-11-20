@@ -37,8 +37,23 @@ class ValkyrieTests: XCTestCase {
     func test_shoot_beginsToShootTopLeftCornersOfTiles() {
         let sut = makeSUT(board: CGRect(x: 0, y: 0, width: 8, height: 8), ship: CGSize(width: 1, height: 4))
         let expectedShootPoints = [CGPoint(x: 0, y: 0), CGPoint(x: 4, y: 0), CGPoint(x: 0, y: 4), CGPoint(x: 4, y: 4)]
-        let actualShootpoints = [sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot()]
-        XCTAssertEqual(expectedShootPoints, actualShootpoints)
+        let actualShootPoints = [sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot()]
+        XCTAssertEqual(expectedShootPoints, actualShootPoints)
+    }
+
+    func test_shoot_shootsByDiagonalOfTiles() {
+        let sut = makeSUT(board: CGRect(x: 0, y: 0, width: 8, height: 8), ship: CGSize(width: 1, height: 4))
+        let expectedShootPoints = [
+            CGPoint(x: 0, y: 0), CGPoint(x: 4, y: 0), CGPoint(x: 0, y: 4), CGPoint(x: 4, y: 4),
+            CGPoint(x: 1, y: 1), CGPoint(x: 5, y: 1), CGPoint(x: 1, y: 5), CGPoint(x: 5, y: 5),
+            CGPoint(x: 2, y: 2), CGPoint(x: 6, y: 2), CGPoint(x: 2, y: 6), CGPoint(x: 6, y: 6),
+            CGPoint(x: 3, y: 3), CGPoint(x: 7, y: 3), CGPoint(x: 3, y: 7), CGPoint(x: 7, y: 7)
+        ]
+        let actualShootPoints = [
+            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
+            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot()
+        ]
+        XCTAssertEqual(expectedShootPoints, actualShootPoints)
     }
 
     // MARK: - Helpers
