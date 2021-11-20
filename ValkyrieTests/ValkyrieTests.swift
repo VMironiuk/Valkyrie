@@ -29,11 +29,7 @@ private final class Valkyrie {
     // MARK: - Public Methods
 
     func shoot() -> CGPoint {
-        if Int(tile.width) % 2 == 0 {
-            return CGPoint.zero
-        }
-
-        return CGPoint(x: Int(tile.width) / 2, y: Int(tile.height) / 2)
+        .zero
     }
 }
 
@@ -63,81 +59,13 @@ class ValkyrieTests: XCTestCase {
 
     // MARK: - Tests for simple shooting
 
-    func test_shoot_returnsSomePointForUnspecifedBoard() {
-        let sut = makeSUT()
-        let expectedShootPoint = CGPoint(x: 0, y: 0)
-        let actualShootPoint = sut.shoot()
-        XCTAssertEqual(expectedShootPoint, actualShootPoint)
-    }
-
-    func test_shoot_returnsZeroPointFor1x1Tile() {
-        let sut = makeSUT(tile: CGRect(x: 0, y: 0, width: 1, height: 1))
-        let expectedShootPoint = CGPoint(x: 0, y: 0)
-        let actualShootPoint = sut.shoot()
-        XCTAssertEqual(expectedShootPoint, actualShootPoint)
-    }
-
-    func test_shoot_returnsZeroPointFor2x2Tile() {
-        let sut = makeSUT(tile: CGRect(x: 0, y: 0, width: 2, height: 2))
-        let expectedShootPoint = CGPoint(x: 0, y: 0)
-        let actualShootPoint = sut.shoot()
-        XCTAssertEqual(expectedShootPoint, actualShootPoint)
-    }
-
-    func test_shoot_returnsCenterPointFor3x3Tile() {
-        let sut = makeSUT(tile: CGRect(x: 0, y: 0, width: 3, height: 3))
-        let expectedShootPoint = CGPoint(x: 1, y: 1)
-        let actualShootPoint = sut.shoot()
-        XCTAssertEqual(expectedShootPoint, actualShootPoint)
-    }
-
-    func test_shoot_returnsCenterPointFor4x4Tile() {
-        let sut = makeSUT(tile: CGRect(x: 0, y: 0, width: 4, height: 4))
-        let expectedShootPoint = CGPoint(x: 0, y: 0)
-        let actualShootPoint = sut.shoot()
-        XCTAssertEqual(expectedShootPoint, actualShootPoint)
-    }
-
-    func test_shoot_returnsCenterPointFor5x5Tile() {
-        let sut = makeSUT(tile: CGRect(x: 0, y: 0, width: 5, height: 5))
-        let expectedShootPoint = CGPoint(x: 2, y: 2)
-        let actualShootPoint = sut.shoot()
-        XCTAssertEqual(expectedShootPoint, actualShootPoint)
-    }
-
-    func test_shoot_returnsCenterPointFor6x6Tile() {
-        let sut = makeSUT(tile: CGRect(x: 0, y: 0, width: 6, height: 6))
-        let expectedShootPoint = CGPoint(x: 0, y: 0)
-        let actualShootPoint = sut.shoot()
-        XCTAssertEqual(expectedShootPoint, actualShootPoint)
-    }
-
-    func test_shoot_returnsCenterPointFor7x7Tile() {
-        let sut = makeSUT(tile: CGRect(x: 0, y: 0, width: 7, height: 7))
-        let expectedShootPoint = CGPoint(x: 3, y: 3)
-        let actualShootPoint = sut.shoot()
-        XCTAssertEqual(expectedShootPoint, actualShootPoint)
-    }
-
-    func test_shoot_returnsCenterPointFor8x8Tile() {
-        let sut = makeSUT(tile: CGRect(x: 0, y: 0, width: 8, height: 8))
-        let expectedShootPoint = CGPoint(x: 0, y: 0)
-        let actualShootPoint = sut.shoot()
-        XCTAssertEqual(expectedShootPoint, actualShootPoint)
-    }
-
-    func test_shoot_returnsCenterPointFor9x9Tile() {
-        let sut = makeSUT(tile: CGRect(x: 0, y: 0, width: 9, height: 9))
-        let expectedShootPoint = CGPoint(x: 4, y: 4)
-        let actualShootPoint = sut.shoot()
-        XCTAssertEqual(expectedShootPoint, actualShootPoint)
-    }
-
-    func test_shoot_returnsCenterPointFor10x10Tile() {
-        let sut = makeSUT(tile: CGRect(x: 0, y: 0, width: 10, height: 10))
-        let expectedShootPoint = CGPoint(x: 0, y: 0)
-        let actualShootPoint = sut.shoot()
-        XCTAssertEqual(expectedShootPoint, actualShootPoint)
+    func test_shoot_beginsToShootFromTopLeftCornerOfTile() {
+        (0...10).forEach { side in
+            let sut = makeSUT(tile: CGRect(x: 0, y: 0, width: side, height: side))
+            let expectedPointForFirstShoot = CGPoint(x: 0, y: 0)
+            let actualPointForFirstShoot = sut.shoot()
+            XCTAssertEqual(expectedPointForFirstShoot, actualPointForFirstShoot)
+        }
     }
 
     // MARK: - Helpers
