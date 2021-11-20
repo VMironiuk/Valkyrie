@@ -6,74 +6,7 @@
 //
 
 import XCTest
-
-private final class Valkyrie {
-
-    // MARK: - Public Properties
-
-    let name = "Valkyrie"
-    let greeting = "Hei Verden!"
-    let winMessage = "Slik blir det med alle!"
-    let loseMessage = "Faen!🤯"
-
-    // MARK: - Private Properties
-
-    private let shooter: Shooter
-
-    // MARK: - Initializers
-
-    init(tile: CGRect) {
-        shooter = Shooter(tile: tile)
-    }
-
-    // MARK: - Public Methods
-
-    func shoot() -> CGPoint {
-        shooter.shoot()
-    }
-}
-
-private final class Shooter {
-
-    // MARK: - Private Properties
-
-    private let tile: CGRect
-    private var queue = [CGPoint]()
-
-    // MARK: - Initializers
-
-    init(tile: CGRect) {
-        self.tile = tile
-        setupQueue()
-    }
-
-    // MARK: - Public Methods
-
-    func shoot() -> CGPoint {
-        if !queue.isEmpty {
-            return queue.removeFirst()
-        }
-
-        return .zero
-    }
-
-    // MARK: - Private Methods
-
-    func setupQueue() {
-        for index in 0..<Int(tile.width) {
-            queue.append(CGPoint(x: index, y: index))
-        }
-
-        for row in 0..<Int(tile.width) {
-            for column in 0..<Int(tile.height) {
-                let point = CGPoint(x: row, y: column)
-                if !queue.contains(point) {
-                    queue.append(point)
-                }
-            }
-        }
-    }
-}
+import Valkyrie
 
 class ValkyrieTests: XCTestCase {
 
