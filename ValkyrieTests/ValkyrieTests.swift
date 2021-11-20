@@ -29,10 +29,6 @@ private final class Valkyrie {
     // MARK: - Public Methods
 
     func shoot() -> CGPoint {
-        if tile == CGRect.zero {
-            return CGPoint.zero
-        }
-
         if Int(tile.width) % 2 == 0 {
             return CGPoint.zero
         } else {
