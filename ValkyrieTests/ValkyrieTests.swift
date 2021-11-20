@@ -56,6 +56,23 @@ class ValkyrieTests: XCTestCase {
         XCTAssertEqual(expectedShootPoints, actualShootPoints)
     }
 
+    func test_shoot_shotsOfBoardCompletely() {
+        let sut = makeSUT(board: CGRect(x: 0, y: 0, width: 8, height: 8), ship: CGSize(width: 1, height: 4))
+        var expectedShootPoints = [CGPoint]()
+        for row in 0..<8 {
+            for column in 0..<8 {
+                expectedShootPoints.append(CGPoint(x: row, y: column))
+            }
+        }
+        let actualShootPoints = (0..<(8 * 8)).reduce([]) { partialResult, _ in
+            partialResult + [sut.shoot()]
+        }
+        XCTAssertEqual(expectedShootPoints.count, actualShootPoints.count)
+        expectedShootPoints.forEach {
+            XCTAssertTrue(actualShootPoints.contains($0))
+        }
+    }
+
     // MARK: - Helpers
 
     private func makeSUT(board: CGRect = .zero, ship: CGSize = .zero) -> Valkyrie {

@@ -40,7 +40,7 @@ final class Shooter {
 
         for row in 0..<Int(tile.width) {
             for column in 0..<Int(tile.height) {
-                let point = CGPoint(x: row, y: column)
+                let point = CGPoint(x: Int(tile.origin.x) + row, y: Int(tile.origin.y) + column)
                 if !queue.contains(point) {
                     queue.append(point)
                 }
