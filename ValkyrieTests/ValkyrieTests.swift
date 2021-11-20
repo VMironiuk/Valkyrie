@@ -15,9 +15,17 @@ private final class Valkyrie {
     let greeting = "Hei Verden!"
     let winMessage = "Slik blir det med alle!"
     let loseMessage = "Faen!🤯"
+
+    // MARK: - Public Methods
+
+    func shoot() -> CGPoint {
+        CGPoint(x: 0, y: 0)
+    }
 }
 
 class ValkyrieTests: XCTestCase {
+
+    // MARK: - Tests for basic properties
 
     func test_name_returnsName() {
         let sut = Valkyrie()
@@ -37,5 +45,14 @@ class ValkyrieTests: XCTestCase {
     func test_loseMessage_returnsLoseMessage() {
         let sut = Valkyrie()
         XCTAssertEqual(sut.loseMessage, "Faen!🤯")
+    }
+
+    // MARK: - Tests for simple shooting
+
+    func test_shoot_returnsSomePointForUnspecifedBoard() {
+        let sut = Valkyrie()
+        let expectedShootPoint = CGPoint(x: 0, y: 0)
+        let actualShootPoint = sut.shoot()
+        XCTAssertEqual(expectedShootPoint, actualShootPoint)
     }
 }
