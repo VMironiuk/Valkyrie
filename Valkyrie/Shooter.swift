@@ -35,7 +35,7 @@ final class Shooter {
 
     func setupQueue() {
         for index in 0..<Int(tile.width) {
-            queue.append(CGPoint(x: index, y: index))
+            queue.append(CGPoint(x: Int(tile.origin.x) + index, y: Int(tile.origin.y) + index))
         }
 
         for row in 0..<Int(tile.width) {

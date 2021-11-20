@@ -18,17 +18,31 @@ public final class Valkyrie {
 
     // MARK: - Private Properties
 
-    private let shooter: Shooter
+    private var shooters = [Shooter]()
+    private var currentShooterIndex = 0
 
     // MARK: - Initializers
 
-    public init(tile: CGRect) {
-        shooter = Shooter(tile: tile)
+    public init(board: CGRect, ship: CGSize) {
+        let maxSide = Int(max(ship.width, ship.height))
+
+        var originX = 0
+        var originY = 0
+        while originY < Int(board.height) {
+            while originX < Int(board.width) {
+                shooters.append(Shooter(tile: CGRect(x: originX, y: originY, width: maxSide, height: maxSide)))
+                originX += maxSide
+            }
+            originY += maxSide
+            originX = 0
+        }
     }
 
     // MARK: - Public Methods
 
     public func shoot() -> CGPoint {
-        shooter.shoot()
+        let shootPoint = shooters[currentShooterIndex].shoot()
+        currentShooterIndex = (currentShooterIndex + 1) % shooters.count
+        return shootPoint
     }
 }
