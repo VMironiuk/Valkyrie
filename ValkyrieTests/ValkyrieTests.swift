@@ -44,13 +44,10 @@ private final class Shooter {
 
     init(tile: CGRect) {
         self.tile = tile
-
-        for index in 0..<Int(tile.width) {
-            queue.append(CGPoint(x: index, y: index))
-        }
+        setupQueue()
     }
 
-    // MARK: - Public Properties
+    // MARK: - Public Methods
 
     func shoot() -> CGPoint {
         if !queue.isEmpty {
@@ -58,6 +55,23 @@ private final class Shooter {
         }
 
         return .zero
+    }
+
+    // MARK: - Private Methods
+
+    func setupQueue() {
+        for index in 0..<Int(tile.width) {
+            queue.append(CGPoint(x: index, y: index))
+        }
+
+        for row in 0..<Int(tile.width) {
+            for column in 0..<Int(tile.height) {
+                let point = CGPoint(x: row, y: column)
+                if !queue.contains(point) {
+                    queue.append(point)
+                }
+            }
+        }
     }
 }
 
@@ -88,7 +102,7 @@ class ValkyrieTests: XCTestCase {
     // MARK: - Tests for simple shooting
 
     func test_shoot_beginsToShootFromTopLeftCornerOfTile() {
-        (0...100).forEach { side in
+        (0...20).forEach { side in
             let sut = makeSUT(tile: CGRect(x: 0, y: 0, width: side, height: side))
             let expectedPointForFirstShoot = CGPoint(x: 0, y: 0)
             let actualPointForFirstShoot = sut.shoot()
@@ -97,11 +111,23 @@ class ValkyrieTests: XCTestCase {
     }
 
     func test_shoot_shootsByDiagonal() {
-        (0...100).forEach { side in
+        (0...20).forEach { side in
             let sut = makeSUT(tile: CGRect(x: 0, y: 0, width: side, height: side))
             let expectedShootPoints = diagonalPoints(for: side)
-            let actualShootPoints = actualPoints(for: side, from: sut)
+            let actualShootPoints = actualDiagonalPoints(for: side, from: sut)
             XCTAssertEqual(expectedShootPoints, actualShootPoints)
+        }
+    }
+
+    func test_shoot_shootsTileCompletely() {
+        (0...20).forEach { side in
+            let sut = makeSUT(tile: CGRect(x: 0, y: 0, width: side, height: side))
+            let expectedShootPoints = completedShootPoints(for: side)
+            let actualShootPoints = actualCompletedShootPoints(for: side, from: sut)
+            XCTAssertEqual(expectedShootPoints.count, actualShootPoints.count)
+            expectedShootPoints.forEach {
+                XCTAssertTrue(actualShootPoints.contains($0))
+            }
         }
     }
 
@@ -117,8 +143,25 @@ class ValkyrieTests: XCTestCase {
         }
     }
 
-    private func actualPoints(for count: Int, from sut: Valkyrie) -> [CGPoint] {
+    private func actualDiagonalPoints(for count: Int, from sut: Valkyrie) -> [CGPoint] {
         (0..<count).reduce([]) { partialResult, _ in
+            partialResult + [sut.shoot()]
+        }
+    }
+
+    private func completedShootPoints(for count: Int) -> [CGPoint] {
+        var result = [CGPoint]()
+        for row in 0..<count {
+            for column in 0..<count {
+                result.append(CGPoint(x: row, y: column))
+            }
+        }
+
+        return result
+    }
+
+    private func actualCompletedShootPoints(for count: Int, from sut: Valkyrie) -> [CGPoint] {
+        (0..<(count * count)).reduce([]) { partialResult, _ in
             partialResult + [sut.shoot()]
         }
     }
