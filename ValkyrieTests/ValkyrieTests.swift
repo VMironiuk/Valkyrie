@@ -31,9 +31,9 @@ private final class Valkyrie {
     func shoot() -> CGPoint {
         if Int(tile.width) % 2 == 0 {
             return CGPoint.zero
-        } else {
-            return CGPoint(x: Int(tile.width) / 2, y: Int(tile.height) / 2)
         }
+
+        return CGPoint(x: Int(tile.width) / 2, y: Int(tile.height) / 2)
     }
 }
 
