@@ -78,33 +78,4 @@ class ValkyrieTests: XCTestCase {
     private func makeSUT(board: CGRect = .zero, ship: CGSize = .zero) -> Valkyrie {
         Valkyrie(board: board, ship: ship)
     }
-
-    private func diagonalPoints(for count: Int) -> [CGPoint] {
-        (0..<count).reduce([]) { partialResult, side in
-            partialResult + [CGPoint(x: side, y: side)]
-        }
-    }
-
-    private func actualDiagonalPoints(for count: Int, from sut: Valkyrie) -> [CGPoint] {
-        (0..<count).reduce([]) { partialResult, _ in
-            partialResult + [sut.shoot()]
-        }
-    }
-
-    private func completedShootPoints(for count: Int) -> [CGPoint] {
-        var result = [CGPoint]()
-        for row in 0..<count {
-            for column in 0..<count {
-                result.append(CGPoint(x: row, y: column))
-            }
-        }
-
-        return result
-    }
-
-    private func actualCompletedShootPoints(for count: Int, from sut: Valkyrie) -> [CGPoint] {
-        (0..<(count * count)).reduce([]) { partialResult, _ in
-            partialResult + [sut.shoot()]
-        }
-    }
 }
