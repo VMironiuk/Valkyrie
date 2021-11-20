@@ -1,5 +1,0 @@
-os: osx
-osx_image: xcode13
-language: swift
-script:
-  - xcodebuild clean build test -project Valkyrie.xcodeproj -scheme "Valkyrie" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk macosx -destination "platform=macOS" ONLY_ACTIVE_ARCH=YES
