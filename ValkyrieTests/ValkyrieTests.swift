@@ -95,6 +95,13 @@ class ValkyrieTests: XCTestCase {
         XCTAssertEqual(expectedShootPoint, actualShootPoint)
     }
 
+    func test_shoot_returnsCenterPointFor4x4Tile() {
+        let sut = makeSUT(tile: CGRect(x: 0, y: 0, width: 4, height: 4))
+        let expectedShootPoint = CGPoint(x: 0, y: 0)
+        let actualShootPoint = sut.shoot()
+        XCTAssertEqual(expectedShootPoint, actualShootPoint)
+    }
+
     func test_shoot_returnsCenterPointFor5x5Tile() {
         let sut = makeSUT(tile: CGRect(x: 0, y: 0, width: 5, height: 5))
         let expectedShootPoint = CGPoint(x: 2, y: 2)
