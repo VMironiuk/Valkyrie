@@ -60,7 +60,7 @@ class ValkyrieTests: XCTestCase {
     // MARK: - Tests for simple shooting
 
     func test_shoot_beginsToShootFromTopLeftCornerOfTile() {
-        (0...10).forEach { side in
+        (0...100).forEach { side in
             let sut = makeSUT(tile: CGRect(x: 0, y: 0, width: side, height: side))
             let expectedPointForFirstShoot = CGPoint(x: 0, y: 0)
             let actualPointForFirstShoot = sut.shoot()
