@@ -51,6 +51,29 @@ class ValkyrieTests: XCTestCase {
         XCTAssertEqual(expectedShootPoints, actualShootPoints)
     }
 
+    func test_shoot_beginsToShootTopLeftCornersOfTilesFor20x20BoardAnd2x3Ships() {
+        let sut = makeSUT(board: CGRect(x: 0, y: 0, width: 20, height: 20), ship: CGSize(width: 2, height: 3))
+        let expectedShootPoints = [
+            CGPoint(x: 0, y: 0), CGPoint(x: 3, y: 0), CGPoint(x: 6, y: 0), CGPoint(x: 9, y: 0), CGPoint(x: 12, y: 0), CGPoint(x: 15, y: 0), CGPoint(x: 18, y: 0),
+            CGPoint(x: 0, y: 3), CGPoint(x: 3, y: 3), CGPoint(x: 6, y: 3), CGPoint(x: 9, y: 3), CGPoint(x: 12, y: 3), CGPoint(x: 15, y: 3), CGPoint(x: 18, y: 3),
+            CGPoint(x: 0, y: 6), CGPoint(x: 3, y: 6), CGPoint(x: 6, y: 6), CGPoint(x: 9, y: 6), CGPoint(x: 12, y: 6), CGPoint(x: 15, y: 6), CGPoint(x: 18, y: 6),
+            CGPoint(x: 0, y: 9), CGPoint(x: 3, y: 9), CGPoint(x: 6, y: 9), CGPoint(x: 9, y: 9), CGPoint(x: 12, y: 9), CGPoint(x: 15, y: 9), CGPoint(x: 18, y: 9),
+            CGPoint(x: 0, y: 12), CGPoint(x: 3, y: 12), CGPoint(x: 6, y: 12), CGPoint(x: 9, y: 12), CGPoint(x: 12, y: 12), CGPoint(x: 15, y: 12), CGPoint(x: 18, y: 12),
+            CGPoint(x: 0, y: 15), CGPoint(x: 3, y: 15), CGPoint(x: 6, y: 15), CGPoint(x: 9, y: 15), CGPoint(x: 12, y: 15), CGPoint(x: 15, y: 15), CGPoint(x: 18, y: 15),
+            CGPoint(x: 0, y: 18), CGPoint(x: 3, y: 18), CGPoint(x: 6, y: 18), CGPoint(x: 9, y: 18), CGPoint(x: 12, y: 18), CGPoint(x: 15, y: 18), CGPoint(x: 18, y: 18)
+        ]
+        let actualShootPoints = [
+            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
+            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
+            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
+            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
+            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
+            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
+            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot()
+        ]
+        XCTAssertEqual(expectedShootPoints, actualShootPoints)
+    }
+
     func test_shoot_shootsByDiagonalOfTiles() {
         let sut = makeSUT(board: CGRect(x: 0, y: 0, width: 8, height: 8), ship: CGSize(width: 1, height: 4))
         let expectedShootPoints = [
