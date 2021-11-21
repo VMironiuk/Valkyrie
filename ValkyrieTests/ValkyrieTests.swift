@@ -157,6 +157,23 @@ class ValkyrieTests: XCTestCase {
         }
     }
 
+    func test_shoot_shotsOfBoardCompletelyFor20x20BoardAnd3x5Ships() {
+        let sut = makeSUT(board: CGRect(x: 0, y: 0, width: 20, height: 20), ship: CGSize(width: 3, height: 5))
+        var expectedShootPoints = [CGPoint]()
+        for row in 0..<20 {
+            for column in 0..<20 {
+                expectedShootPoints.append(CGPoint(x: row, y: column))
+            }
+        }
+        let actualShootPoints = (0..<(20 * 20)).reduce([]) { partialResult, _ in
+            partialResult + [sut.shoot()]
+        }
+        XCTAssertEqual(expectedShootPoints.count, actualShootPoints.count)
+        expectedShootPoints.forEach {
+            XCTAssertTrue(actualShootPoints.contains($0))
+        }
+    }
+
     // MARK: - Helpers
 
     private func makeSUT(board: CGRect = .zero, ship: CGSize = .zero) -> Valkyrie {
