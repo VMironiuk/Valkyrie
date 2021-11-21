@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C34472F274A8C8E00AC9B70 /* ShootingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C34472E274A8C8E00AC9B70 /* ShootingController.swift */; };
 		3CAEA4CF2749045700FD0C9A /* Valkyrie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CAEA4C62749045700FD0C9A /* Valkyrie.framework */; };
 		3CAEA4D42749045700FD0C9A /* ValkyrieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAEA4D32749045700FD0C9A /* ValkyrieTests.swift */; };
 		3CAEA4D52749045700FD0C9A /* Valkyrie.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CAEA4C92749045700FD0C9A /* Valkyrie.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3CFEE8112749790300926A2A /* Valkyrie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFEE8102749790300926A2A /* Valkyrie.swift */; };
+		3CFEE8132749794A00926A2A /* Shooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFEE8122749794A00926A2A /* Shooter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,10 +26,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3C34472E274A8C8E00AC9B70 /* ShootingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootingController.swift; sourceTree = "<group>"; };
 		3CAEA4C62749045700FD0C9A /* Valkyrie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Valkyrie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CAEA4C92749045700FD0C9A /* Valkyrie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Valkyrie.h; sourceTree = "<group>"; };
 		3CAEA4CE2749045700FD0C9A /* ValkyrieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValkyrieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CAEA4D32749045700FD0C9A /* ValkyrieTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValkyrieTests.swift; sourceTree = "<group>"; };
+		3CFEE8102749790300926A2A /* Valkyrie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Valkyrie.swift; sourceTree = "<group>"; };
+		3CFEE8122749794A00926A2A /* Shooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shooter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +76,9 @@
 			isa = PBXGroup;
 			children = (
 				3CAEA4C92749045700FD0C9A /* Valkyrie.h */,
+				3CFEE8102749790300926A2A /* Valkyrie.swift */,
+				3CFEE8122749794A00926A2A /* Shooter.swift */,
+				3C34472E274A8C8E00AC9B70 /* ShootingController.swift */,
 			);
 			path = Valkyrie;
 			sourceTree = "<group>";
@@ -145,6 +154,7 @@
 				TargetAttributes = {
 					3CAEA4C52749045700FD0C9A = {
 						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1310;
 					};
 					3CAEA4CD2749045700FD0C9A = {
 						CreatedOnToolsVersion = 13.1;
@@ -213,6 +223,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CFEE8132749794A00926A2A /* Shooter.swift in Sources */,
+				3C34472F274A8C8E00AC9B70 /* ShootingController.swift in Sources */,
+				3CFEE8112749790300926A2A /* Valkyrie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +372,7 @@
 		3CAEA4D92749045700FD0C9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -380,6 +394,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -387,6 +402,7 @@
 		3CAEA4DA2749045700FD0C9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -415,6 +431,7 @@
 		3CAEA4DC2749045700FD0C9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -436,6 +453,7 @@
 		3CAEA4DD2749045700FD0C9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
