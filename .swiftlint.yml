@@ -40,8 +40,8 @@ type_body_length:
   warning: 100
   error: 200
 function_body_length:
-  warning: 10
-  error: 20
+  warning: 20
+  error: 30
 cyclomatic_complexity:
   warning: 5
   error: 10
