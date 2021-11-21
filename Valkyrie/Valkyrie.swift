@@ -22,7 +22,6 @@ public final class Valkyrie {
     // MARK: - Private Properties
 
     private var shooters = [Shooter]()
-    private var currentShooterIndex = 0
 
     // MARK: - Initializers
 
