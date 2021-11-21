@@ -17,14 +17,12 @@ final class Shooter {
 
     // MARK: - Private Properties
 
-    private let tile: CGRect
     private var queue = [CGPoint]()
 
     // MARK: - Initializers
 
     init(tile: CGRect, boardSize: CGSize) {
-        self.tile = tile
-        setupQueue(with: boardSize)
+        setupQueue(with: boardSize, tile: tile)
     }
 
     // MARK: - Public Methods
@@ -39,7 +37,7 @@ final class Shooter {
 
     // MARK: - Private Methods
 
-    func setupQueue(with boardSize: CGSize) {
+    func setupQueue(with boardSize: CGSize, tile: CGRect) {
         for index in 0..<Int(tile.width) {
             queue.append(CGPoint(x: Int(tile.origin.x) + index, y: Int(tile.origin.y) + index))
         }
