@@ -16,45 +16,22 @@ public final class Valkyrie {
     public let winMessage = "Slik blir det med alle!"
     public let loseMessage = "Faen!🤯"
     public var isEmpty: Bool {
-        shooters.isEmpty
+        shootingController.isEmpty
     }
 
     // MARK: - Private Properties
 
-    private var shooters = [Shooter]()
+    private let shootingController: ShootingController
 
     // MARK: - Initializers
 
     public init(board: CGRect, ship: CGSize) {
-        let maxSide = Int(max(ship.width, ship.height))
-
-        var originX = 0
-        var originY = 0
-        while originY < Int(board.height) {
-            while originX < Int(board.width) {
-                shooters.append(Shooter(
-                    tile: CGRect(x: originX, y: originY, width: maxSide, height: maxSide),
-                    boardSize: CGSize(width: board.width, height: board.height)))
-                originX += maxSide
-            }
-            originY += maxSide
-            originX = 0
-        }
+        shootingController = ShootingController(board: board, ship: ship)
     }
 
     // MARK: - Public Methods
 
     public func shoot() -> CGPoint {
-        if shooters.isEmpty {
-            return CGPoint(x: -1, y: -1)
-        }
-
-        let shootPoint = shooters[.zero].shoot()
-        shooters.shuffle()
-        shooters = shooters.filter {
-            !$0.isEmpty
-        }
-
-        return shootPoint
+        shootingController.shoot()
     }
 }
