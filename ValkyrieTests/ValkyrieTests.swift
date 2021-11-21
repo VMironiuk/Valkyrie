@@ -91,45 +91,6 @@ class ValkyrieTests: XCTestCase {
 
     // MARK: - Helpers
 
-    private final class Finisher {
-
-        // MARK: - Public Properties
-
-        var isEmpty: Bool {
-            queue.isEmpty
-        }
-
-        // MARK: - Private Properties
-
-        private var queue = [CGPoint]()
-        private var previousHitPoint = CGPoint(x: -1, y: -1)
-
-        // MARK: - Public Methods
-
-        func update(with hitPoint: CGPoint) {
-            let newQueue = [
-                CGPoint(x: hitPoint.x - 1, y: hitPoint.y - 1), CGPoint(x: hitPoint.x, y: hitPoint.y - 1),
-                CGPoint(x: hitPoint.x + 1, y: hitPoint.y - 1), CGPoint(x: hitPoint.x - 1, y: hitPoint.y),
-                CGPoint(x: hitPoint.x + 1, y: hitPoint.y), CGPoint(x: hitPoint.x - 1, y: hitPoint.y + 1),
-                CGPoint(x: hitPoint.x, y: hitPoint.y + 1), CGPoint(x: hitPoint.x + 1, y: hitPoint.y + 1)
-            ]
-            let oldSet = Set(queue)
-            let newSet = Set(newQueue)
-            queue = Array(oldSet.symmetricDifference(newSet))
-            queue.removeAll(where: { $0 == hitPoint })
-            queue.removeAll(where: { $0 == previousHitPoint })
-            previousHitPoint = hitPoint
-        }
-
-        func shoot() -> CGPoint {
-            if queue.isEmpty {
-                return CGPoint(x: -1, y: -1)
-            }
-
-            return queue.removeFirst()
-        }
-    }
-
     private func makeSUT(board: CGRect = .zero, ship: CGSize = .zero) -> Valkyrie {
         Valkyrie(board: board, ship: ship)
     }
@@ -160,12 +121,5 @@ class ValkyrieTests: XCTestCase {
             (board: CGRect(x: .zero, y: .zero, width: 30, height: 30), ship: CGSize(width: 1, height: 8)),
             (board: CGRect(x: .zero, y: .zero, width: 40, height: 40), ship: CGSize(width: 6, height: 8))
         ]
-    }
-}
-
-extension CGPoint: Hashable {
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(x)
-        hasher.combine(y)
     }
 }

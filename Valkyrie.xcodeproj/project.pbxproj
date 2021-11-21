@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3C34472F274A8C8E00AC9B70 /* ShootingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C34472E274A8C8E00AC9B70 /* ShootingController.swift */; };
+		3C344731274AB1E900AC9B70 /* Finisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C344730274AB1E900AC9B70 /* Finisher.swift */; };
 		3CAEA4CF2749045700FD0C9A /* Valkyrie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CAEA4C62749045700FD0C9A /* Valkyrie.framework */; };
 		3CAEA4D42749045700FD0C9A /* ValkyrieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAEA4D32749045700FD0C9A /* ValkyrieTests.swift */; };
 		3CAEA4D52749045700FD0C9A /* Valkyrie.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CAEA4C92749045700FD0C9A /* Valkyrie.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		3C34472E274A8C8E00AC9B70 /* ShootingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootingController.swift; sourceTree = "<group>"; };
+		3C344730274AB1E900AC9B70 /* Finisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Finisher.swift; sourceTree = "<group>"; };
 		3CAEA4C62749045700FD0C9A /* Valkyrie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Valkyrie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CAEA4C92749045700FD0C9A /* Valkyrie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Valkyrie.h; sourceTree = "<group>"; };
 		3CAEA4CE2749045700FD0C9A /* ValkyrieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValkyrieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +80,7 @@
 				3CAEA4C92749045700FD0C9A /* Valkyrie.h */,
 				3CFEE8102749790300926A2A /* Valkyrie.swift */,
 				3CFEE8122749794A00926A2A /* Shooter.swift */,
+				3C344730274AB1E900AC9B70 /* Finisher.swift */,
 				3C34472E274A8C8E00AC9B70 /* ShootingController.swift */,
 			);
 			path = Valkyrie;
@@ -224,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CFEE8132749794A00926A2A /* Shooter.swift in Sources */,
+				3C344731274AB1E900AC9B70 /* Finisher.swift in Sources */,
 				3C34472F274A8C8E00AC9B70 /* ShootingController.swift in Sources */,
 				3CFEE8112749790300926A2A /* Valkyrie.swift in Sources */,
 			);
