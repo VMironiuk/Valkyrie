@@ -38,7 +38,7 @@ class ValkyrieTests: XCTestCase {
 
     // MARK: - Tests for simple shooting
 
-    func test_shoots_shootsTheBoardCompletely() {
+    func test_shoot_shootsTheBoardCompletely() {
         makeTestInputs().forEach { testInput in
             let sut = makeSUT(board: testInput.board, ship: testInput.ship)
             let expectedShootPoints = expectedCompleteShootPoints(for: Int(testInput.board.width))
