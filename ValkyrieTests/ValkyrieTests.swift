@@ -93,6 +93,12 @@ class ValkyrieTests: XCTestCase {
 
     private final class Finisher {
 
+        // MARK: - Public Properties
+
+        var isEmpty: Bool {
+            queue.isEmpty
+        }
+
         // MARK: - Private Properties
 
         private var queue = [CGPoint]()
