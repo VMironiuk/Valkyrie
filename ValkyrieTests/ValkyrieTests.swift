@@ -68,7 +68,7 @@ class ValkyrieTests: XCTestCase {
 
     private func completedShootPoints(from sut: Valkyrie) -> [CGPoint] {
         var points = [CGPoint]()
-        while sut.canShoot {
+        while !sut.isEmpty {
             points.append(sut.shoot())
         }
         return points

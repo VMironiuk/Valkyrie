@@ -15,8 +15,8 @@ public final class Valkyrie {
     public let greeting = "Hei Verden!"
     public let winMessage = "Slik blir det med alle!"
     public let loseMessage = "Faen!🤯"
-    public var canShoot: Bool {
-        !shooters.isEmpty
+    public var isEmpty: Bool {
+        shooters.isEmpty
     }
 
     // MARK: - Private Properties
