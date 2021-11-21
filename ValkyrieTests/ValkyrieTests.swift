@@ -50,10 +50,61 @@ class ValkyrieTests: XCTestCase {
         }
     }
 
+    func test_finisherReturnsNearPointsArountHitPoint() {
+        let hitPoint = CGPoint(x: 8, y: 8)
+        let finisher = Finisher()
+        finisher.update(with: hitPoint)
+        let expectedPoints = [
+            CGPoint(x: 7, y: 7), CGPoint(x: 8, y: 7), CGPoint(x: 9, y: 7),
+            CGPoint(x: 7, y: 8), CGPoint(x: 9, y: 8),
+            CGPoint(x: 7, y: 9), CGPoint(x: 8, y: 9), CGPoint(x: 9, y: 9)
+        ]
+        let actualPoints = makeFinisherPoints(from: finisher)
+        XCTAssertEqual(expectedPoints.count, actualPoints.count)
+        expectedPoints.forEach {
+            XCTAssertTrue(actualPoints.contains($0))
+        }
+    }
+
     // MARK: - Helpers
+
+    private final class Finisher {
+
+        // MARK: - Private Properties
+
+        private var queue = [CGPoint]()
+
+        // MARK: - Public Methods
+
+        func update(with hitPoint: CGPoint) {
+            queue += [
+                CGPoint(x: hitPoint.x - 1, y: hitPoint.y - 1), CGPoint(x: hitPoint.x, y: hitPoint.y - 1),
+                CGPoint(x: hitPoint.x + 1, y: hitPoint.y - 1), CGPoint(x: hitPoint.x - 1, y: hitPoint.y),
+                CGPoint(x: hitPoint.x + 1, y: hitPoint.y), CGPoint(x: hitPoint.x - 1, y: hitPoint.y + 1),
+                CGPoint(x: hitPoint.x, y: hitPoint.y + 1), CGPoint(x: hitPoint.x + 1, y: hitPoint.y + 1)
+            ]
+
+            queue = Array(Set(queue))
+        }
+
+        func shoot() -> CGPoint {
+            if queue.isEmpty {
+                return CGPoint(x: -1, y: -1)
+            }
+
+            return queue.removeFirst()
+        }
+    }
 
     private func makeSUT(board: CGRect = .zero, ship: CGSize = .zero) -> Valkyrie {
         Valkyrie(board: board, ship: ship)
+    }
+
+    private func makeFinisherPoints(from finisher: Finisher) -> [CGPoint] {
+        [
+            finisher.shoot(), finisher.shoot(), finisher.shoot(), finisher.shoot(),
+            finisher.shoot(), finisher.shoot(), finisher.shoot(), finisher.shoot()
+        ]
     }
 
     private func expectedCompleteShootPoints(for boardSide: Int) -> [CGPoint] {
@@ -82,5 +133,12 @@ class ValkyrieTests: XCTestCase {
             (board: CGRect(x: .zero, y: .zero, width: 30, height: 30), ship: CGSize(width: 1, height: 8)),
             (board: CGRect(x: .zero, y: .zero, width: 40, height: 40), ship: CGSize(width: 6, height: 8))
         ]
+    }
+}
+
+extension CGPoint: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(x)
+        hasher.combine(y)
     }
 }
