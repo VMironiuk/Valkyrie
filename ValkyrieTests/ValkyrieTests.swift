@@ -10,6 +10,10 @@ import Valkyrie
 
 class ValkyrieTests: XCTestCase {
 
+    // MARK: - Types
+
+    typealias TestInputType = [(board: CGRect, ship: CGSize)]
+
     // MARK: - Tests for basic properties
 
     func test_name_returnsName() {
@@ -34,144 +38,15 @@ class ValkyrieTests: XCTestCase {
 
     // MARK: - Tests for simple shooting
 
-    func test_shoot_beginsToShootTopLeftCornersOfTilesFor20x20BoardAnd3x5Ships() {
-        let sut = makeSUT(board: CGRect(x: 0, y: 0, width: 20, height: 20), ship: CGSize(width: 3, height: 5))
-        let expectedShootPoints = [
-            CGPoint(x: 0, y: 0), CGPoint(x: 5, y: 0), CGPoint(x: 10, y: 0), CGPoint(x: 15, y: 0),
-            CGPoint(x: 0, y: 5), CGPoint(x: 5, y: 5), CGPoint(x: 10, y: 5), CGPoint(x: 15, y: 5),
-            CGPoint(x: 0, y: 10), CGPoint(x: 5, y: 10), CGPoint(x: 10, y: 10), CGPoint(x: 15, y: 10),
-            CGPoint(x: 0, y: 15), CGPoint(x: 5, y: 15), CGPoint(x: 10, y: 15), CGPoint(x: 15, y: 15)
-        ]
-        let actualShootPoints = [
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot()
-        ]
-        XCTAssertEqual(expectedShootPoints, actualShootPoints)
-    }
-
-    func test_shoot_beginsToShootTopLeftCornersOfTilesFor20x20BoardAnd2x3Ships() {
-        let sut = makeSUT(board: CGRect(x: 0, y: 0, width: 20, height: 20), ship: CGSize(width: 2, height: 3))
-        let expectedShootPoints = [
-            CGPoint(x: 0, y: 0), CGPoint(x: 3, y: 0), CGPoint(x: 6, y: 0), CGPoint(x: 9, y: 0), CGPoint(x: 12, y: 0), CGPoint(x: 15, y: 0), CGPoint(x: 18, y: 0),
-            CGPoint(x: 0, y: 3), CGPoint(x: 3, y: 3), CGPoint(x: 6, y: 3), CGPoint(x: 9, y: 3), CGPoint(x: 12, y: 3), CGPoint(x: 15, y: 3), CGPoint(x: 18, y: 3),
-            CGPoint(x: 0, y: 6), CGPoint(x: 3, y: 6), CGPoint(x: 6, y: 6), CGPoint(x: 9, y: 6), CGPoint(x: 12, y: 6), CGPoint(x: 15, y: 6), CGPoint(x: 18, y: 6),
-            CGPoint(x: 0, y: 9), CGPoint(x: 3, y: 9), CGPoint(x: 6, y: 9), CGPoint(x: 9, y: 9), CGPoint(x: 12, y: 9), CGPoint(x: 15, y: 9), CGPoint(x: 18, y: 9),
-            CGPoint(x: 0, y: 12), CGPoint(x: 3, y: 12), CGPoint(x: 6, y: 12), CGPoint(x: 9, y: 12), CGPoint(x: 12, y: 12), CGPoint(x: 15, y: 12), CGPoint(x: 18, y: 12),
-            CGPoint(x: 0, y: 15), CGPoint(x: 3, y: 15), CGPoint(x: 6, y: 15), CGPoint(x: 9, y: 15), CGPoint(x: 12, y: 15), CGPoint(x: 15, y: 15), CGPoint(x: 18, y: 15),
-            CGPoint(x: 0, y: 18), CGPoint(x: 3, y: 18), CGPoint(x: 6, y: 18), CGPoint(x: 9, y: 18), CGPoint(x: 12, y: 18), CGPoint(x: 15, y: 18), CGPoint(x: 18, y: 18)
-        ]
-        let actualShootPoints = [
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot()
-        ]
-        XCTAssertEqual(expectedShootPoints, actualShootPoints)
-    }
-
-    func test_shoot_beginsToShootTopLeftCornersOfTilesFor30x30BoardAnd10x10Ships() {
-        let sut = makeSUT(board: CGRect(x: 0, y: 0, width: 30, height: 30), ship: CGSize(width: 10, height: 10))
-        let expectedShootPoints = [
-            CGPoint(x: 0, y: 0), CGPoint(x: 10, y: 0), CGPoint(x: 20, y: 0),
-            CGPoint(x: 0, y: 10), CGPoint(x: 10, y: 10), CGPoint(x: 20, y: 10),
-            CGPoint(x: 0, y: 20), CGPoint(x: 10, y: 20), CGPoint(x: 20, y: 20)
-        ]
-        let actualShootPoints = [
-            sut.shoot(), sut.shoot(), sut.shoot(),
-            sut.shoot(), sut.shoot(), sut.shoot(),
-            sut.shoot(), sut.shoot(), sut.shoot()
-        ]
-        XCTAssertEqual(expectedShootPoints, actualShootPoints)
-    }
-
-    func test_shoot_beginsToShootTopLeftCornersOfTilesFor30x30BoardAnd1x8Ships() {
-        let sut = makeSUT(board: CGRect(x: 0, y: 0, width: 30, height: 30), ship: CGSize(width: 1, height: 8))
-        let expectedShootPoints = [
-            CGPoint(x: 0, y: 0), CGPoint(x: 8, y: 0), CGPoint(x: 16, y: 0), CGPoint(x: 24, y: 0),
-            CGPoint(x: 0, y: 8), CGPoint(x: 8, y: 8), CGPoint(x: 16, y: 8), CGPoint(x: 24, y: 8),
-            CGPoint(x: 0, y: 16), CGPoint(x: 8, y: 16), CGPoint(x: 16, y: 16), CGPoint(x: 24, y: 16),
-            CGPoint(x: 0, y: 24), CGPoint(x: 8, y: 24), CGPoint(x: 16, y: 24), CGPoint(x: 24, y: 24)
-        ]
-        let actualShootPoints = [
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot()
-        ]
-        XCTAssertEqual(expectedShootPoints, actualShootPoints)
-    }
-
-    func test_shoot_beginsToShootTopLeftCornersOfTilesFor40x40BoardAnd6x8Ships() {
-        let sut = makeSUT(board: CGRect(x: 0, y: 0, width: 40, height: 40), ship: CGSize(width: 6, height: 8))
-        let expectedShootPoints = [
-            CGPoint(x: 0, y: 0), CGPoint(x: 8, y: 0), CGPoint(x: 16, y: 0), CGPoint(x: 24, y: 0), CGPoint(x: 32, y: 0),
-            CGPoint(x: 0, y: 8), CGPoint(x: 8, y: 8), CGPoint(x: 16, y: 8), CGPoint(x: 24, y: 8), CGPoint(x: 32, y: 8),
-            CGPoint(x: 0, y: 16), CGPoint(x: 8, y: 16), CGPoint(x: 16, y: 16), CGPoint(x: 24, y: 16), CGPoint(x: 32, y: 16),
-            CGPoint(x: 0, y: 24), CGPoint(x: 8, y: 24), CGPoint(x: 16, y: 24), CGPoint(x: 24, y: 24), CGPoint(x: 32, y: 24),
-            CGPoint(x: 0, y: 32), CGPoint(x: 8, y: 32), CGPoint(x: 16, y: 32), CGPoint(x: 24, y: 32), CGPoint(x: 32, y: 32)
-        ]
-        let actualShootPoints = [
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot()
-        ]
-        XCTAssertEqual(expectedShootPoints, actualShootPoints)
-    }
-
-    func test_shoot_shootsByDiagonalOfTiles() {
-        let sut = makeSUT(board: CGRect(x: 0, y: 0, width: 8, height: 8), ship: CGSize(width: 1, height: 4))
-        let expectedShootPoints = [
-            CGPoint(x: 0, y: 0), CGPoint(x: 4, y: 0), CGPoint(x: 0, y: 4), CGPoint(x: 4, y: 4),
-            CGPoint(x: 1, y: 1), CGPoint(x: 5, y: 1), CGPoint(x: 1, y: 5), CGPoint(x: 5, y: 5),
-            CGPoint(x: 2, y: 2), CGPoint(x: 6, y: 2), CGPoint(x: 2, y: 6), CGPoint(x: 6, y: 6),
-            CGPoint(x: 3, y: 3), CGPoint(x: 7, y: 3), CGPoint(x: 3, y: 7), CGPoint(x: 7, y: 7)
-        ]
-        let actualShootPoints = [
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(),
-            sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot(), sut.shoot()
-        ]
-        XCTAssertEqual(expectedShootPoints, actualShootPoints)
-    }
-
-    func test_shoot_shotsOfBoardCompletely() {
-        let sut = makeSUT(board: CGRect(x: 0, y: 0, width: 8, height: 8), ship: CGSize(width: 1, height: 4))
-        var expectedShootPoints = [CGPoint]()
-        for row in 0..<8 {
-            for column in 0..<8 {
-                expectedShootPoints.append(CGPoint(x: row, y: column))
+    func test_shoots_shootsTheBoardCompletely() {
+        makeTestInputs().forEach { testInput in
+            let sut = makeSUT(board: testInput.board, ship: testInput.ship)
+            let expectedShootPoints = expectedCompleteShootPoints(for: Int(testInput.board.width))
+            let actualShootPoints = completedShootPoints(from: sut)
+            XCTAssertEqual(expectedShootPoints.count, actualShootPoints.count)
+            expectedShootPoints.forEach {
+                XCTAssertTrue(actualShootPoints.contains($0), "Valkyrie didn't shoot to the point \($0)")
             }
-        }
-        let actualShootPoints = (0..<(8 * 8)).reduce([]) { partialResult, _ in
-            partialResult + [sut.shoot()]
-        }
-        XCTAssertEqual(expectedShootPoints.count, actualShootPoints.count)
-        expectedShootPoints.forEach {
-            XCTAssertTrue(actualShootPoints.contains($0))
-        }
-    }
-
-    func test_shoot_shotsOfBoardCompletelyFor20x20BoardAnd3x5Ships() {
-        let boardSide = 20
-        let sut = makeSUT(board: CGRect(x: 0, y: 0, width: boardSide, height: boardSide), ship: CGSize(width: 3, height: 5))
-        var expectedShootPoints = [CGPoint]()
-        for row in 0..<boardSide {
-            for column in 0..<boardSide {
-                expectedShootPoints.append(CGPoint(x: row, y: column))
-            }
-        }
-        let actualShootPoints = (0..<(boardSide * boardSide)).reduce([]) { partialResult, _ in
-            partialResult + [sut.shoot()]
-        }
-        XCTAssertEqual(expectedShootPoints.count, actualShootPoints.count)
-        expectedShootPoints.forEach {
-            XCTAssertTrue(actualShootPoints.contains($0))
         }
     }
 
@@ -179,5 +54,40 @@ class ValkyrieTests: XCTestCase {
 
     private func makeSUT(board: CGRect = .zero, ship: CGSize = .zero) -> Valkyrie {
         Valkyrie(board: board, ship: ship)
+    }
+
+    private func expectedCompleteShootPoints(for boardSide: Int) -> [CGPoint] {
+        var points = [CGPoint]()
+        for row in 0..<boardSide {
+            for column in 0..<boardSide {
+                points.append(CGPoint(x: row, y: column))
+            }
+        }
+        return points
+    }
+
+    private func completedShootPoints(from sut: Valkyrie) -> [CGPoint] {
+        var points = [CGPoint]()
+        while sut.canShoot {
+            points.append(sut.shoot())
+        }
+        return points
+    }
+
+    private func makeTestInputs() -> TestInputType {
+        [
+            (board: CGRect(x: .zero, y: .zero, width: 20, height: 20), ship: CGSize(width: 3, height: 5)),
+            (board: CGRect(x: .zero, y: .zero, width: 20, height: 20), ship: CGSize(width: 2, height: 3)),
+            (board: CGRect(x: .zero, y: .zero, width: 30, height: 30), ship: CGSize(width: 10, height: 10)),
+            (board: CGRect(x: .zero, y: .zero, width: 30, height: 30), ship: CGSize(width: 1, height: 8)),
+            (board: CGRect(x: .zero, y: .zero, width: 40, height: 40), ship: CGSize(width: 6, height: 8))
+        ]
+    }
+}
+
+extension CGPoint: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(x)
+        hasher.combine(y)
     }
 }

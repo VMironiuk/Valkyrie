@@ -15,6 +15,9 @@ public final class Valkyrie {
     public let greeting = "Hei Verden!"
     public let winMessage = "Slik blir det med alle!"
     public let loseMessage = "Faen!🤯"
+    public var canShoot: Bool {
+        !shooters.isEmpty
+    }
 
     // MARK: - Private Properties
 
@@ -30,7 +33,9 @@ public final class Valkyrie {
         var originY = 0
         while originY < Int(board.height) {
             while originX < Int(board.width) {
-                shooters.append(Shooter(tile: CGRect(x: originX, y: originY, width: maxSide, height: maxSide)))
+                shooters.append(Shooter(
+                    tile: CGRect(x: originX, y: originY, width: maxSide, height: maxSide),
+                    boardSize: CGSize(width: board.width, height: board.height)))
                 originX += maxSide
             }
             originY += maxSide
@@ -41,8 +46,16 @@ public final class Valkyrie {
     // MARK: - Public Methods
 
     public func shoot() -> CGPoint {
-        let shootPoint = shooters[currentShooterIndex].shoot()
-        currentShooterIndex = (currentShooterIndex + 1) % shooters.count
+        if shooters.isEmpty {
+            return CGPoint(x: -1, y: -1)
+        }
+
+        let shootPoint = shooters[.zero].shoot()
+        shooters.shuffle()
+        shooters = shooters.filter {
+            !$0.isEmpty
+        }
+
         return shootPoint
     }
 }

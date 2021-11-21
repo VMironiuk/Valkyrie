@@ -9,6 +9,12 @@ import Foundation
 
 final class Shooter {
 
+    // MARK: - Public Properties
+
+    var isEmpty: Bool {
+        queue.isEmpty
+    }
+
     // MARK: - Private Properties
 
     private let tile: CGRect
@@ -16,9 +22,9 @@ final class Shooter {
 
     // MARK: - Initializers
 
-    init(tile: CGRect) {
+    init(tile: CGRect, boardSize: CGSize) {
         self.tile = tile
-        setupQueue()
+        setupQueue(with: boardSize)
     }
 
     // MARK: - Public Methods
@@ -28,12 +34,12 @@ final class Shooter {
             return queue.removeFirst()
         }
 
-        return .zero
+        return CGPoint(x: -1, y: -1)
     }
 
     // MARK: - Private Methods
 
-    func setupQueue() {
+    func setupQueue(with boardSize: CGSize) {
         for index in 0..<Int(tile.width) {
             queue.append(CGPoint(x: Int(tile.origin.x) + index, y: Int(tile.origin.y) + index))
         }
@@ -45,6 +51,10 @@ final class Shooter {
                     queue.append(point)
                 }
             }
+        }
+
+        queue = queue.filter {
+            $0.x < boardSize.width && $0.y < boardSize.height
         }
     }
 }
